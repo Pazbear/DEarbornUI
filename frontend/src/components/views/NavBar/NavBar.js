@@ -13,7 +13,7 @@ function NavBar(props) {
                     <div className="header-title"><a href="/">DEarborn</a></div>
                     <div className="row-log">
                         <div className="logged-out pull-right"><a href="/login">로그인</a></div>
-                        <div className="register pull-right"><a href="/">회원가입</a></div>
+                        <div className="register pull-right"><a href="/register">회원가입</a></div>
                     </div>
                 </div>
             </div>

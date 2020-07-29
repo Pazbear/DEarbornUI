@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import RankBox from './Sections/RankBox'
+import VoteBox from './Sections/VoteBox'
 import './Sections/Vote.css'
 function LandingPageVote(props) {
 
@@ -10,7 +11,7 @@ function LandingPageVote(props) {
                 <RankBox />
             </div>
             <div className="vote">
-                투표
+                <VoteBox />
             </div>
         </div>
     );

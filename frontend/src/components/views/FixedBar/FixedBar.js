@@ -10,7 +10,7 @@ function FixedBar(props) {
                     투표 페이지
                 </div>
             </a>
-            <a href="/">
+            <a href="/repo">
                 <div id="fixed-repo">
                     저장소 페이지
                 </div>

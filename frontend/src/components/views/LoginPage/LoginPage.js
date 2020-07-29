@@ -49,7 +49,7 @@ function LoginPage(props) {
                 <input type="submit"/>
                 <div style={{marginTop:'20px', borderTop:'1px solid gray'}}>
                     <a href>비밀번호 찾기</a><br/>
-                    <a href>회원가입</a>
+                    <a href="/register">회원가입</a>
                 </div>
             </form>
         )
