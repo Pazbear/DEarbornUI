@@ -30,11 +30,12 @@ function NavBar(props) {
                     <div className="row-log">
                         {user.userData && !user.userData.isAuth ?
                         (<>
-                        <div className="logged-out pull-right"><a href="/login">로그인</a></div>
                         <div className="register pull-right"><a href="/register">회원가입</a></div>
+                        <div className="logged-out pull-right"><a href="/login">로그인</a></div>
                         </>) :
                         (<>
                         <div className="logged-out pull-right"><a onClick={logoutHandler}>로그아웃</a></div>
+                        <div className="register pull-right"><a href="/upload">업로드</a></div>
                         </>)
                         }
                     </div>

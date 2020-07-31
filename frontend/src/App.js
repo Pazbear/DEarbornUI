@@ -16,6 +16,7 @@ import LandingPageVote from './components/views/LandingPage/LandingPageVote'
 import LoginPage from './components/views/LoginPage/LoginPage'
 import RegisterPage from './components/views/RegisterPage/RegisterPage'
 import VoteDetailPage from './components/views/DetailPage/VoteDetailPage'
+import UploadVotePage from './components/views/UploadPage/UploadVotePage'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route exact path='/repo' component={Auth(LandingPageRepo, null)}/>
           <Route exact path='/login' component={Auth(LoginPage, false)}/>
           <Route exact path='/register' component={Auth(RegisterPage, false)}/>
+          <Route exact path='/upload' component={Auth(UploadVotePage, true)}/>
         </Switch>
       </div>
       <Route path="^/(?!.*(/login|/register)).*$" component={Footer}/>
