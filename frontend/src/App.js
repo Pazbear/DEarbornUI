@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import './App.css';
 
+import Auth from './hoc/auth'
 
 import NavBar from './components/views/NavBar/NavBar'
 import FixedBar from './components/views/FixedBar/FixedBar'
@@ -24,11 +25,10 @@ function App() {
       <Route path={ new RegExp("^(?!.*(/register|/login)).*$") } component={FixedBar}/>
       <div style={{minHeight:'calc(100vh - 80px)'}}>
         <Switch>
-          <Route exact path='/' component={LandingPageVote}/>
-          <Route exact path='/repo' component={LandingPageRepo}/>
-          <Route exact path='/login' component={LoginPage}/>
-          <Route exact path='/register' component={RegisterPage}/>
-          <Route exact path="/vote/detail" component={VoteDetailPage}/>
+          <Route exact path='/' component={Auth(LandingPageVote, null)}/>
+          <Route exact path='/repo' component={Auth(LandingPageRepo, null)}/>
+          <Route exact path='/login' component={Auth(LoginPage, false)}/>
+          <Route exact path='/register' component={Auth(RegisterPage, false)}/>
         </Switch>
       </div>
       <Route path="^/(?!.*(/login|/register)).*$" component={Footer}/>

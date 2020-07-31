@@ -76,6 +76,32 @@ function RegisterPage(props) {
                 <label htmlFor="nickname">Nickname</label>
                     <input name="nickname" placeholder="Name" ref={register}></input>
                 </div>
+                <div className="form-group">
+                <label htmlFor="avatar">Avatar</label>
+                    <input name="avatar" placeholder="avatar" ref={register}></input>
+                </div>
+                <div className="form-group">
+                <label htmlFor="job">Job</label>
+                    <select name="job" placeholder="job" ref={register}>
+                        <option value="designer">무관</option>
+                        <option value="designer">디자이너</option>
+                        <option value="designer">학생</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                <label htmlFor="major">자신 있는 분야</label>
+                <br/>
+                <label>상의</label>
+                <input type="radio" name="major" value="상의" ref={register}></input>
+                <label>하의</label>
+                <input type="radio" name="major" value="하의" ref={register}></input>
+                <label>모자</label>
+                <input type="radio" name="major" value="모자" ref={register}></input>
+                <label>신발</label>
+                <input type="radio" name="major" value="신발" ref={register}></input>
+                <label>악세서리</label>
+                <input type="radio" name="major" value="악세서리" ref={register}></input>
+                </div>
                 <input type="submit"/>
                 <div style={{marginTop:'20px', borderTop:'1px solid gray'}}>
                     <a href="/login">로그인</a><br/>
