@@ -1,44 +1,28 @@
 import React, { useState } from 'react';
-import {Typography} from 'antd'
-import {useForm} from 'react-hook-form'
+import {Typography, Input, Form, Select, Radio, Checkbox} from 'antd'
+import {useForm, Controller} from 'react-hook-form'
 import '../LoginPage/LoginPage.css'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 
 import {registerUser} from '../../../_actions/user_action'
 
-const { Title } =Typography;
-
+const { Title } =Typography
+const {Option} = Select
 
 function RegisterPage(props) {
-
-    const [ID, setID] = useState("");
-    const [Password, setPassword] = useState("")
-    const [Disabled, setDisabled] = useState(true)
-
     const dispatch = useDispatch()
 
-    const onIDChange = (event) => {
-        setID(event.currentTarget.value)
-    }
+    const {control, register, handleSubmit} = useForm();
 
-    const onPasswordChange = (event) => {
-        setPassword(event.currentTarget.value)
-    }
+    const [Job, setJob] = useState(1)
+    const [Major, setMajor] = useState(1)
 
-    const isDisabled = () =>{
-        if(ID && Password){
-            setDisabled(true)
-        }else{
-            setDisabled(false)
-        }
+    const RegisterForm = () =>{
 
-    }
-
-    const Form = () =>{
-        const {register, handleSubmit} = useForm();
 
         const onSubmit = data =>{
+            console.log(data)
             if(data.confirmPassword !== data.password){
                 return alert("2차 패스워드가 다릅니다.")
             }
@@ -58,50 +42,88 @@ function RegisterPage(props) {
             })
         }
 
+
         return (
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input name="email" placeholder="Email" ref={register}></input>
-                </div>
-                <div className="form-group">
-                <label htmlFor="password">Password</label>
-                    <input type="password" name="password" placeholder="Password" ref={register}></input>
-                </div>
-                <div className="form-group">
-                <label htmlFor="confirmPassword">Password2</label>
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password" ref={register}></input>
-                </div>
-                <div className="form-group">
-                <label htmlFor="nickname">Nickname</label>
-                    <input name="nickname" placeholder="Name" ref={register}></input>
-                </div>
-                <div className="form-group">
-                <label htmlFor="avatar">Avatar</label>
-                    <input name="avatar" placeholder="avatar" ref={register}></input>
-                </div>
-                <div className="form-group">
-                <label htmlFor="job">Job</label>
-                    <select name="job" placeholder="job" ref={register}>
-                        <option value="designer">무관</option>
-                        <option value="designer">디자이너</option>
-                        <option value="designer">학생</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                <label htmlFor="major">자신 있는 분야</label>
-                <br/>
-                <label>상의</label>
-                <input type="radio" name="major" value="상의" ref={register}></input>
-                <label>하의</label>
-                <input type="radio" name="major" value="하의" ref={register}></input>
-                <label>모자</label>
-                <input type="radio" name="major" value="모자" ref={register}></input>
-                <label>신발</label>
-                <input type="radio" name="major" value="신발" ref={register}></input>
-                <label>악세서리</label>
-                <input type="radio" name="major" value="악세서리" ref={register}></input>
-                </div>
+                <Controller
+                    as={
+                        <Form.Item
+                            label="E-mail"
+                            
+                        >
+                            <Input type="text"/>
+                        </Form.Item>
+                    }
+                    name="email"
+                    control={control}
+                    
+                />
+                <Controller
+                    as={
+                        <Form.Item
+                            label="패스워드"
+                            
+                        >
+                            <Input type="password"/>
+                        </Form.Item>
+                    }
+                    name="password"
+                    control={control}
+                />
+                <Controller
+                    as={
+                        <Form.Item
+                            label="다시 확인"
+                            
+                        >
+                            <Input type="password"/>
+                        </Form.Item>
+                    }
+                    name="confirmPassword"
+                    control={control}
+                />
+                <Controller
+                    as={
+                        <Form.Item
+                            label="닉네임"
+                            
+                        >
+                            <Input type="text"/>
+                        </Form.Item>
+                    }
+                    name="nickname"
+                    control={control}
+                />
+                <label>직종 : </label>
+                <Controller
+                    as={
+                        <Select style={{width:120}}>
+                            <Option value="1">무관</Option>
+                            <Option value="2">학생</Option>
+                            <Option value="3">디자이너</Option>
+                        </Select>
+                    }
+                    name="job"
+                    control={control}
+                    defaultValue="1"
+                />
+                <br/><br/>
+                <label>자신 있는 분야 : </label><br/><br/>
+                <Controller
+                    as={
+                        <Checkbox.Group>
+                            <Checkbox value={1}>없음</Checkbox>
+                            <Checkbox value={2}>상의</Checkbox>
+                            <Checkbox value={3}>하의</Checkbox>
+                            <Checkbox value={4}>모자</Checkbox>
+                            <Checkbox value={5}>신발</Checkbox>
+                            <Checkbox value={6}>악세서리</Checkbox>
+                        </Checkbox.Group>
+                    }
+                    name="major"
+                    control={control}
+                    defaultValue="1"
+                />
                 <input type="submit"/>
                 <div style={{marginTop:'20px', borderTop:'1px solid gray'}}>
                     <a href="/login">로그인</a><br/>
@@ -115,7 +137,7 @@ function RegisterPage(props) {
             <div className="auth-wrapper">
                 <Title level={2}><a href="/">DEarborn</a></Title>
                 <section style={{backgroundColor:'white', padding:'25px', borderRadius:'7px'}}>
-                    {Form()}
+                    {RegisterForm()}
                 </section>
             </div>
         </div>

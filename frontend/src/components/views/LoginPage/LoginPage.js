@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {Typography} from 'antd'
-import {useForm} from 'react-hook-form'
+import {Typography, Form, Input, Button} from 'antd'
+import {useForm, Controller} from 'react-hook-form'
 import './LoginPage.css'
 import { useDispatch } from 'react-redux';
 
@@ -20,10 +20,11 @@ function LoginPage(props) {
         setRememberEmail(!RememberEmail)
     }
 
-    const Form = () =>{
-        const {register, handleSubmit} = useForm();
+    const LoginForm = () =>{
+        const {control, register, handleSubmit} = useForm();
 
         const onSubmit = data =>{
+            console.log(data)
             dispatch(loginUser(data))
             .then(response =>{
                 if(response.payload.success){
@@ -42,19 +43,37 @@ function LoginPage(props) {
 
         return (
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input name="email" placeholder="email" value={window.localStorage.getItem('rememberEmail')} ref={register}></input>
-                </div>
-                <div className="form-group">
-                <label htmlFor="password">Password</label>
-                    <input type="password" name="password" placeholder="password" ref={register}></input>
-                </div>
+                <Controller
+                    as={
+                        <Form.Item
+                            label="E-mail"
+                            
+                        >
+                            <Input type="text" defaultValue={window.localStorage.getItem('rememberEmail')}/>
+                        </Form.Item>
+                    }
+                    name="email"
+                    control={control}
+                    defaultValue={window.localStorage.getItem('rememberEmail')}
+                />
+                <Controller
+                    as={
+                        <Form.Item
+                            label="패스워드"
+                            
+                        >
+                            <Input type="password"/>
+                        </Form.Item>
+                    }
+                    name="password"
+                    control={control}
+                />
+                
                 <div style={{float:'left', marginLeft:'1rem'}}>
                 <input type="checkbox" onChange={handleRememberEmail} checked={RememberEmail}></input>
-                <label>remember Email</label>
+                <label> remember Email</label>
                 </div><br/>
-                <input type="submit"/>
+                <input type="submit"></input>
                 <div style={{marginTop:'20px', borderTop:'1px solid gray'}}>
                     <a href>비밀번호 찾기</a><br/>
                     <a href="/register">회원가입</a>
@@ -68,7 +87,7 @@ function LoginPage(props) {
             <div className="auth-wrapper">
                 <Title level={2}><a href="/">DEarborn</a></Title>
                 <section style={{backgroundColor:'white', padding:'25px', borderRadius:'7px'}}>
-                    {Form()}
+                    {LoginForm()}
                 </section>
             </div>
         </div>

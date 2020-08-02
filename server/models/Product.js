@@ -12,8 +12,19 @@ const productSchema = mongoose.Schema({
         maxlength : 50,
         text : true,
     },
-    description : {
+    content : {
         type : String
     },
-    
-})
+    vote : {
+        type : Number,
+        default : 0,
+    },
+    views : {
+        type: Number,
+        default : 0,
+    }
+}, {timestamps : true})
+
+const Product = mongoose.model('Product', productSchema)
+
+module.exports = {Product}
