@@ -31,10 +31,7 @@ var upload = multer({storage : storage}).single("file")
 
 router.post("/uploadImagesInArticle", (req, res)=>{
 
-    upload(req, res, err => {
-        if(err) return res.status(400).json({uploaded: false, error: { message : "could not uploaad this image"}})
-        return res.status(200).json({uploaded:true, url:`http://localhost:5000/${res.req.file.path}/${res.req.file.filename}`})
-    })
+    console.log("upload connect")
 })
 
 module.exports = router
